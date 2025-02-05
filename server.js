@@ -11,7 +11,6 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(cors()); // Allow requests from the frontend
 app.use(express.json()); // Parse JSON data
-app.use(express.static("public"));
 
 
 // Configure Cloudinary
