@@ -1,9 +1,10 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const multer = require("multer");
-const cloudinary = require("cloudinary").v2;
-const fs = require("fs");
+import express from "express";
+import cors from "cors";
+import multer from "multer";
+import cloudinary from "cloudinary";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
