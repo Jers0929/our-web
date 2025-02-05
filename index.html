@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Website</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        body {
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+            position: relative; 
+            padding-top: 60px; 
+        }
+
+        header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 100;
+    text-align: center;
+}
+        .container {
+            padding: 50px;
+        }
+        img {
+            width: 200px;
+            border-radius: 50%;
+        }
+      
+        .home-section {
+    display: flex;
+    justify-content: center; 
+    align-items: center;      
+    height: 100vh;            
+    flex-direction: column;   
+    text-align: center;    
+}
+
+.home-section h2, .home-section p {
+        display: block;  
+        font-size: 24px; /* Reduce size for smaller screens */
+        white-space: normal; 
+        border-right: none; /* Remove cursor effect */
+}
+
+
+.home-section p {
+    margin-top: 20px; /* Space between the h2 and p */
+}
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.nav-buttons button {
+    max-width: 100px; /* Adjust as needed */
+    width: auto; /* Prevents full width */
+    display: inline-block; /* Keeps buttons inline */
+    font-size: 11px;
+        margin: 5px; /* Reduce margin for mobile */
+    color: black; /* Fix text color */
+    background-color: #ecdadd;
+    border: none;
+    padding: 5px 7px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+
+.nav-buttons button:hover {
+    background-color: hsl(0, 90%, 49%);
+}
+
+        /* For sections */
+        .section {
+            padding: 50px 20px;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .gallery-container {
+            position: relative;
+            max-width: 100%; /* Adjust the width to be fully responsive */
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .gallery {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: auto;
+        }
+        .gallery img {
+            width: 100%;  /* Images will now take up the full container width */
+            max-width: 200px; /* This will limit image size for larger screens */
+            object-fit: contain;
+            height: auto;  /* Maintain aspect ratio */
+            margin: 7px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+
+        @media (max-width: 768px) {
+            .gallery img {
+                max-width: 120px; /* Make images smaller on mobile screens */
+                border: 2px solid red; 
+            }
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        .gallery-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
+        /* Love Letter Effect */
+        #fullMessage {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-color: rgba(112, 99, 99, 0.8); 
+            border-radius: 15px;
+            max-width: 600px; /* Add this to limit the width */
+            margin: 20px auto; /* Center the letter */
+            padding: 20px;
+            text-align: left; /* Text alignment inside the letter */
+        }
+
+        .timeline-container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgb(255, 41, 95);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-event {
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .timeline-event img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out; /* Ensure transition happens */
+}
+
+.timeline-event img:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+
+        .event-date {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .event-details {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #4d4747;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Countdown Styles */
+        #countdown {
+            background-color: rgba(53, 49, 49, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        #timer {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ff4b5c;
+        }
+        #addImageBtn {
+    background-color: #ff4081; /* Pinkish color */
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: block;
+    margin: 10px auto;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+#addImageBtn:hover {
+    background-color: #e91e63; /* Darker pink */
+    transform: scale(1.05);
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-buttons">
+            <button onclick="scrollToSection('home')">Home</button>
+            <button onclick="scrollToSection('letter')">Love Letter</button>
+            <button onclick="scrollToSection('gallery')">Gallery</button>
+            <button onclick="scrollToSection('playlist')">Playlist</button>
+            <button onclick="scrollToSection('timeline')">Timeline</button>
+            <button onclick="scrollToSection('countdown')">Countdown</button>
+        </div>
+    </header>
+
+    <section id="home" class="home-section">
+        <h2 id="homepage-heading">Welcome to this simple webpage, My Love! ❤️</h2>
+        <p id="homepage-paragraph">This is a page where we remember our moments together.</p>
+            <img src="img11.jpg" alt="Logo" class="logo">
+
+            
+    </section>
+    
+    <section id="letter" class="section">
+        <h2>My Love Letter to You</h2>
+        <p id="loveMessage">Click mo po yung button para mabasa mo 🥰</p>
+        <button onclick="toggleMessage()">View Message</button>
+    
+        <div id="fullMessage">
+            <p>Hey Love,</p>
+            <p>It's 1st day of February! 💖 Isang bagong buwan na naman na puno ng pagkakataong iparamdam ko kung gaano kita kamahal. Sana lagi tayong masaya at patuloy nating alagaan ang isa’t isa.</p>
+            
+            <p>Sana iwasan natin ang mga away hangga't maaari at lagi nating ayusin kapag may hindi pagkakaintindihan. Gusto ko lang na lagi tayong okay at magkasama sa lahat ng bagay. Ikaw ang pinakamahalaga sa akin, at hinding-hindi ako magsasawang ipakita yon sayo.</p>
+            
+            <p>Mahal na mahal kita, Love ko! Let’s make this month full of love and happiness. 💕</p>
+            
+            <p>Forever and always yours,</p>
+            <p><strong>Jerwin</strong></p>
+        </div>
+
+       
+    
+        <section id="gallery" class="section">
+            <br>
+            <br>
+            <h2>Our Sweet Memories</h2>
+            <div class="gallery-container">
+                <button class="gallery-btn prev" onclick="prevSlide()">&#10094;</button>
+                <div class="gallery" id="gallery">
+                    <img src="img1.jpg" alt="Memory 1">
+                    <img src="img12.jpg" alt="Memory 2">
+                    <img src="img4.jpg" alt="Memory 3">
+                    <img src="img5.jpg" alt="Memory 4">
+                    <img src="img10.jpg" alt="Memory 1">
+                    <img src="img15.jpg" alt="Memory 2">
+                    <img src="img19.jpg" alt="Memory 3">
+                    <img src="img6.jpg" alt="Memory 4">
+                    <img src="img3.jpg" alt="Memory 4">
+                    <img src="img24.jpg" alt="Memory 1">
+                    <img src="img7.jpg" alt="Memory 2">
+                    <img src="img17.jpg" alt="Memory 3">
+                    <img src="img18.jpg" alt="Memory 4">
+                    <img src="25.jpg" alt="Memory 4">
+                    <img src="img16.jpg" alt="Memory 1">
+                    <img src="img20.jpg" alt="Memory 2">
+                    <img src="img21.jpg" alt="Memory 3">
+                    <img src="img22.jpg" alt="Memory 4">
+                    <img src="img23.jpg" alt="Memory 3">
+                    <img src="img13.jpg" alt="Memory 4">
+                </div>
+                <button class="gallery-btn next" onclick="nextSlide()">&#10095;</button>  
+            </div>
+        
+            <button id="addImageBtn">Add Image</button>
+    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+    <p id="uploadMessage" style="display: none; color: green; font-weight: bold; margin-top: 10px;"></p>
+        
+        </section>
+        
+    
+    <section id="playlist" class="section">
+        <h2>Our Love Songs 🎶</h2>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4WgViu9gw3qYOr3iF9OuLG?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1hJtJvPX9knMysNDQw0HDJ?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/06IkOr83qPqa3yYvrIjgxp?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  
+    </section>
+    <section id="timeline" class="section">
+        <h2>Our Timeline</h2>
+    <div class="timeline-container">
+        <div class="timeline-event">
+            <img src="img24.jpg" alt="Event 1" onclick="toggleDetails(1)">
+            <div class="event-date">August 16, 2024</div>
+            <div class="event-details" id="event1-details">
+                <h3>First Meet</h3>
+                <p>First time natin magmeet, nagkakahiyaan pa pero nag enjoy naman kahit papano. Una palang, ramdam ko na agad na ikaw na talaga hehe
+                </p>
+            </div>
+        </div>
+    
+        <div class="timeline-event">
+            <img src="img4.jpg" alt="Event 2" onclick="toggleDetails(2)">
+            <div class="event-date">August 24, 2024</div>
+            <div class="event-details" id="event2-details">
+                <h3>First Date na walang label 😄</h3>
+                <p>This was the first time we go out. First time manood ng sine na magkasama at yun din yung first time kong makapasok sa cinehan. It was a great experience with you. Dito ko naramdaman na komportable ako sayo at masaya akong kasama ka 🥰.</p>
+            </div>
+        </div>
+    
+        <div class="timeline-event">
+            <img src="img13.jpg" alt="Event 3" onclick="toggleDetails(3)">
+            <div class="event-date">December 1, 2024</div>
+            <div class="event-details" id="event3-details">
+                <h3>First Date as Couple</h3>
+                <p>We had an amazing experience together. Mas masaya kumpara sa unang date na hindi pa magpartner. Kakaiba yung feeling, mas naramdaman natin yung pagmamahal natin sa isa't isa. I'm so happy dahil sa wakas nagdate na tayo bilang magpartner ❤️.</p>
+            </div>
+        </div>
+    </div>
+       <br>
+       <br>
+       <br>
+       <br>
+        <h2>Countdown for a Special Day</h2>
+        <div id="countdown">
+            <p>Time left for the Valentines:</p>
+            <div id="timer"></div>
+        </div>
+    
+    <script src="server.js" defer></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
