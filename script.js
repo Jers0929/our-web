@@ -135,22 +135,38 @@ document.getElementById("imageInput").addEventListener("change", function (event
     const file = event.target.files[0];
     if (!file) return; // If no file is selected, return early
 
-    // Create a FileReader to read the image
-    const reader = new FileReader();
+    // Prepare form data for upload
+    const formData = new FormData();
+    formData.append("image", file); // Append the file to the form data
 
-    reader.onload = function (e) {
-        const newImage = document.createElement("img");
-        newImage.src = e.target.result; // The base64 URL of the uploaded image
-        newImage.alt = "Newly Uploaded Image";
-        newImage.classList.add("gallery-img"); // Optional: Add a class to style the image if needed
+    // Send the file to the server
+    fetch("http://localhost:3000/upload", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success && data.url) {
+            const newImage = document.createElement("img");
+            newImage.src = data.url; // The Cloudinary URL of the uploaded image
+            newImage.alt = "Uploaded Image";
+            newImage.classList.add("gallery-img"); // Optional: Add a class to style the image if needed
 
-        // Append the new image to the gallery
-        document.querySelector(".gallery").appendChild(newImage);
+            // Append the new image to the gallery
+            document.querySelector(".gallery").appendChild(newImage);
 
-        // Optionally, show a success message
+            // Optionally, show a success message
+            document.getElementById("uploadMessage").style.display = "block";
+            document.getElementById("uploadMessage").innerText = "Image uploaded successfully!";
+        } else {
+            // Handle the error if the upload fails
+            document.getElementById("uploadMessage").style.display = "block";
+            document.getElementById("uploadMessage").innerText = "Image upload failed!";
+        }
+    })
+    .catch(error => {
+        console.error("Upload error:", error);
         document.getElementById("uploadMessage").style.display = "block";
-        document.getElementById("uploadMessage").innerText = "Image uploaded successfully!";
-    };
-
-    reader.readAsDataURL(file); // Read the file as a base64 URL
+        document.getElementById("uploadMessage").innerText = "Something went wrong!";
+    });
 });
